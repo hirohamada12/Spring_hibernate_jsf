@@ -1,0 +1,108 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>JSF Spring Hibernate Integration</title>
+
+</h:head>
+<h:body>
+	<h:form>
+		<p:panel id="empadd" header="Add Employee" style="margin-bottom:10px;">
+			<p:messages id="messages" />
+			<h:panelGrid columns="1">
+				<h:outputLabel for="empno" value="Employee No :" />
+				<p:inputText id="empno" value="#{employee.empno}"
+					label="Employee No">
+					<f:validateLength minimum="4" />
+				</p:inputText>
+				<!-- 				<p:message for="empno" /> -->
+				<h:outputLabel for="ename" value="Employee Nanme :" />
+				<p:inputText id="ename" value="#{employee.ename}"
+					label="Employee Name" required="true">
+				</p:inputText>
+				<!-- 				<p:message for="ename" /> -->
+				<h:outputLabel for="job" value="Employee Job :" />
+				<p:inputText id="job" value="#{employee.job}" label="Employee Job">
+				</p:inputText>
+				<!-- 				<p:message for="job" /> -->
+				<h:outputLabel for="mgr" value="Employee MGR :" />
+				<p:inputText id="mgr" value="#{employee.mgr}" label="Employee MGR"
+					required="true">
+				</p:inputText>
+				<!-- 				<p:message for="mgr" /> -->
+				<h:outputLabel for="hiredate" value="Employee Hiredate :" />
+				<p:calendar id="hiredate" value="#{employee.hiredate}"
+					label="Employee Hiredate" required="true">
+				</p:calendar>
+				<!-- 				<p:message for="hiredate" /> -->
+				<h:outputLabel for="sal" value="Employee Salary :" />
+				<p:inputText id="sal" value="#{employee.sal}" label="Employee sal"
+					required="true">
+				</p:inputText>
+				<!-- 				<p:message for="sal" /> -->
+				<h:outputLabel for="comm" value="Employee Comm:" />
+				<p:inputText id="comm" value="#{employee.comm}"
+					label="Employee Comm" required="true">
+				</p:inputText>
+				<!-- 				<p:message for="comm" /> -->
+				<h:outputLabel for="deptno" value="Employee DeptNo :" />
+				<p:inputText id="deptno" value="#{employee.dept.deptno}"
+					label="Employee Dept" required="true">
+				</p:inputText>
+				<!-- 				<p:selectOneMenu id="console" value="#{employee.dept.deptno}" -->
+				<!-- 					style="width:125px"> -->
+				<!-- 					<f:selectItem itemLabel="10" itemValue="10" /> -->
+				<!-- 					<f:selectItem itemLabel="20" itemValue="20" /> -->
+				<!-- 					<f:selectItem itemLabel="30" itemValue="30" /> -->
+				<!-- 					<f:selectItem itemLabel="40" itemValue="40" /> -->
+				<!-- 				</p:selectOneMenu> -->
+
+				<!-- 				<p:message for="dept" /> -->
+				<center>
+					<p:commandButton ajax="true" value="Submit" icon="ui-icon-disk"
+						action="#{employeeService.addEmployee(employee)}" />
+				</center>
+			</h:panelGrid>
+		</p:panel>
+		<p:panel header="Employee List" style="margin-bottom:10px;">
+			<p:dataTable var="emp" value="#{employeeService.readEmployees()}">
+				<p:column headerText="Employee No">
+					<h:outputText value="#{emp.empno}" />
+				</p:column>
+
+				<p:column headerText="EmployeeName">
+					<h:outputText value="#{emp.ename}" />
+				</p:column>
+
+				<p:column headerText="EmployeeJob">
+					<h:outputText value="#{emp.job}" />
+				</p:column>
+
+				<p:column headerText="EmployeeMGR">
+					<h:outputText value="#{emp.mgr}" />
+				</p:column>
+				<p:column headerText="Employee Hiredate">
+					<h:outputText value="#{emp.hiredate}" />
+				</p:column>
+				<p:column headerText="Employee Sal">
+					<h:outputText value="#{emp.sal}" />
+				</p:column>
+				<p:column headerText="Employee Comm">
+					<h:outputText value="#{emp.comm}" />
+				</p:column>
+				<p:column headerText="Employee deptno">
+					<h:outputText value="#{emp.dept.deptno}" />
+				</p:column>
+				<p:column headerText="Employee Edit and Delete">
+					<p:button value="Edit" icon="pi pi-pencil" style="width:100px;">
+						<f:param name="edit" value="emp.empno" />
+					</p:button>
+					<p:commandButton value="Delete" icon="ui-icon-trash"
+						action="#{employeeService.deleteEmployee(emp.empno)}" />
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

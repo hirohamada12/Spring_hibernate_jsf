@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>JSF Spring Hibernate Integration</title>
+	<style type="text/css">
+.tg {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-color: #ccc;
+}
+
+.tg td {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #fff;
+}
+
+.tg th {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #f0f0f0;
+}
+
+.tg .tg-4eph {
+	background-color: #f9f9f9
+}
+</style>
+</h:head>
+<h:body>
+	<h3>Persons List</h3>
+	<c:if test="${!empty employeeService.readEmployees()}">
+		<p:dataTable var="emp" value="#{employeeService.readEmployees()}">
+			<p:column headerText="Employyee">
+				<h:outputText value="#{emp.empNo}" />
+			</p:column>
+
+			<p:column headerText="EmployeeName">
+				<h:outputText value="#{emp.empName}" />
+			</p:column>
+
+			<p:column headerText="EmployeeJob">
+				<h:outputText value="#{emp.empJob}" />
+			</p:column>
+
+			<p:column headerText="EmployeeManagerNo">
+				<h:outputText value="#{emp.empManagerNo}" />
+			</p:column>
+		</p:dataTable>
+	</c:if>
+</h:body>
+</html>

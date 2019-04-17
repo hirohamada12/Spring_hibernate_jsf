@@ -1,0 +1,233 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>JSF Spring Hibernate Integration</title>
+	<!-- html source code -->
+	<link type="text/css" rel="stylesheet"
+		href="/project/faces/javax.faces.resource/theme.css?ln=primefaces-glass-x" />
+</h:head>
+<h:body>
+	<style type="text/css">
+.ui-row-editor .ui-row-editor-pencil {
+	margin-left: 8px;
+}
+</style>
+	<h:form>
+		<p:panel id="empadd" header="Add Employee" style="margin-bottom:10px;">
+			<p:messages id="messages" />
+			<h:panelGrid columns="1">
+				<h:outputLabel for="empno" value="Employee No :" />
+				<p:inputText id="empno" value="#{employee.empno}"
+					label="Employee No">
+					<f:validateLength minimum="4" />
+				</p:inputText>
+				<!-- 				<p:message for="empno" /> -->
+				<h:outputLabel for="ename" value="Employee Nanme :" />
+				<p:inputText id="ename" value="#{employee.ename}"
+					label="Employee Name" required="true">
+				</p:inputText>
+				<!-- 				<p:message for="ename" /> -->
+				<h:outputLabel for="job" value="Employee Job :" />
+				<p:inputText id="job" value="#{employee.job}" label="Employee Job">
+				</p:inputText>
+				<!-- 				<p:message for="job" /> -->
+				<h:outputLabel for="mgr" value="Employee MGR :" />
+				<p:inputText id="mgr" value="#{employee.mgr}" label="Employee MGR"
+					required="true">
+				</p:inputText>
+				<!-- 				<p:message for="mgr" /> -->
+				<h:outputLabel for="hiredate" value="Employee Hiredate :" />
+				<p:calendar id="hiredate" value="#{employee.hiredate}"
+					label="Employee Hiredate" required="true">
+				</p:calendar>
+				<!-- 				<p:message for="hiredate" /> -->
+				<h:outputLabel for="sal" value="Employee Salary :" />
+				<p:inputText id="sal" value="#{employee.sal}" label="Employee sal"
+					required="true">
+				</p:inputText>
+				<!-- 				<p:message for="sal" /> -->
+				<h:outputLabel for="comm" value="Employee Comm:" />
+				<p:inputText id="comm" value="#{employee.comm}"
+					label="Employee Comm" required="true">
+				</p:inputText>
+				<!-- 				<p:message for="comm" /> -->
+				<h:outputLabel for="deptno" value="Employee DeptNo :" />
+				<p:inputText id="deptno" value="#{employee.dept.deptno}"
+					label="Employee Dept" required="true">
+				</p:inputText>
+				<!-- 				<p:selectOneMenu id="console" value="#{employee.dept.deptno}" -->
+				<!-- 					style="width:125px"> -->
+				<!-- 					<f:selectItem itemLabel="10" itemValue="10" /> -->
+				<!-- 					<f:selectItem itemLabel="20" itemValue="20" /> -->
+				<!-- 					<f:selectItem itemLabel="30" itemValue="30" /> -->
+				<!-- 					<f:selectItem itemLabel="40" itemValue="40" /> -->
+				<!-- 				</p:selectOneMenu> -->
+
+				<!-- 				<p:message for="dept" /> -->
+				<center>
+					<p:commandButton ajax="true" value="Submit" icon="ui-icon-disk"
+						action="#{controllerEmp.addEmp(employee)}"
+						update="@(.employeeTable)" />
+				</center>
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+	<h:form id="formEmp">
+		<!-- NEWS -->
+		<p:dataTable id="tableid" var="emp" value="#{controllerEmp.listEmp}"
+			editable="true" style="margin-bottom:20px" styleClass="employeeTable">
+			<f:facet name="header">
+            				Employee Table
+        		</f:facet>
+			<p:ajax event="rowEdit" listener="#{controllerEmp.addEmp(emp)}"
+				update="@(.employeeTable)" />
+			<p:ajax event="rowEditCancel" update="@(.employeeTable)" />
+
+			<p:column headerText="No">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{emp.empno}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="modelInput" value="#{emp.empno}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Name">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{emp.ename}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{emp.ename}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Job">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{emp.job}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{emp.job}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column headerText="MGR">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{emp.mgr}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{emp.mgr}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Hiredate">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{emp.hiredate}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:calendar value="#{emp.hiredate}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Salary">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{emp.sal}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{emp.sal}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Comm">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{emp.comm}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{emp.comm}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="DeptNo">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{emp.dept.deptno}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{emp.dept.deptno}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Edit" style="width:35px">
+				<p:rowEditor />
+			</p:column>
+
+			<p:column headerText="Delete">
+				<p:commandLink id="ajax" update="@(.employeeTable)"
+					action="#{controllerEmp.deleteEmp(emp.empno)}">
+					<h:outputText value="Delete" />
+				</p:commandLink>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+	<p:panel header="Filter And Export Excel">
+		<h:form>
+			<h:panelGrid columns="1" cellpadding="5">
+				<h:outputText value="Job" />
+				<p:inputText id="jobFilter" value="#{controllerEmp.job}">
+					<p:ajax event="keyup" update="@(.employeeTable)"
+						listener="#{controllerEmp.filterEmp()}" />
+				</p:inputText>
+				<h:outputText value="Hiredate " />
+				<p:calendar id="hiredateFilter" value="#{controllerEmp.hiredate}">
+					<p:ajax event="keyup" update="@(.employeeTable)"
+						listener="#{controllerEmp.filterEmp()}" />
+				</p:calendar>
+				<p:commandButton value="Export File " ajax="false"
+					onclick="PrimeFaces.monitorDownload(start, stop);"
+					icon="pi pi-arrow-down">
+					<p:fileDownload value="#{controllerEmp.exportFileExelAndDown()}" />
+				</p:commandButton>
+			</h:panelGrid>
+		</h:form>
+	</p:panel>
+	<script type="text/javascript">
+		//<![CDATA[
+		function start() {
+			PF('statusDialog').show();
+		}
+
+		function stop() {
+			PF('statusDialog').hide();
+		}
+		//]]>
+	</script>
+	<p:panel header="Upload File">
+		<h:form enctype="multipart/form-data">
+			<p:growl id="messages" showDetail="true" />
+			<p:fileUpload value="#{uploadFileData.uploadedFile}" mode="simple"
+				skinSimple="true" />
+
+			<br />
+			<br />
+			<p:commandButton value="Submit" ajax="false"
+				action="#{uploadFileData.upload()}" />
+		</h:form>
+	</p:panel>
+</h:body>
+</html>
