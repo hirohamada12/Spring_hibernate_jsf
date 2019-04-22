@@ -19,5 +19,8 @@ public interface EmployeeDao {
 	void deleteEmployee(Integer empId);
 	
 	void insertPhoneNumber(List<PhoneNumber> phoneNumber);
+	
+	List<Object[]> getJob();
+	
 
 }

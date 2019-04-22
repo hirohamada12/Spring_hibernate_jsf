@@ -2,7 +2,6 @@ package com.controller;
 
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
-import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,13 +31,22 @@ public class EmployeeController {
 
 	@Autowired
 	private ExportExcel exportExcel;
-
+	
 	@Autowired
 	ServletContext context;
 
 	private List<Employee> listEmp;
 	private String job = "";
 	private Date hiredate = null;
+	private List<Object[]> listJob;
+
+	public List<Object[]> getListJob() {
+		return listJob;
+	}
+
+	public void setListJob(List<Object[]> listJob) {
+		this.listJob = listJob;
+	}
 
 	public String getJob() {
 		return job;
@@ -64,6 +71,7 @@ public class EmployeeController {
 	@PostConstruct
 	public void init() {
 		listEmp = employeeService.readEmployees(job, hiredate);
+		listJob=employeeService.getJob();
 	}
 
 	public List<Employee> getListEmp() {

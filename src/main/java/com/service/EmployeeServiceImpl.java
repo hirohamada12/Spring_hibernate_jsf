@@ -51,5 +51,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeDao.insertPhoneNumber(phoneNumber);
 		
 	}
+	@Transactional
+	@Override
+	public List<Object[]> getJob() {
+		return employeeDao.getJob();
+	}
 
 }

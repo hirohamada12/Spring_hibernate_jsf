@@ -189,10 +189,17 @@
 		<h:form>
 			<h:panelGrid columns="1" cellpadding="5">
 				<h:outputText value="Job" />
-				<p:inputText id="jobFilter" value="#{controllerEmp.job}">
-					<p:ajax event="keyup" update="@(.employeeTable)"
-						listener="#{controllerEmp.filterEmp()}" />
-				</p:inputText>
+<!-- 				<p:inputText id="jobFilter" value="#{controllerEmp.job}"> -->
+<!-- 					<p:ajax event="keyup" update="@(.employeeTable)" -->
+<!-- 						listener="#{controllerEmp.filterEmp()}" /> -->
+<!-- 				</p:inputText> -->
+				<p:selectOneMenu id="jobFilter" value="#{controllerEmp.job}"
+					style="width:190px" valueChangeListener="#{controllerEmp.filterEmp()}">
+					<f:selectItems value="#{controllerEmp.listJob}" var="job"
+						itemLabel="#{job}" itemValue="#{job}" />
+						<p:ajax event="change" update="@(.employeeTable)"/>
+				</p:selectOneMenu>
+
 				<h:outputText value="Hiredate " />
 				<p:calendar id="hiredateFilter" value="#{controllerEmp.hiredate}">
 					<p:ajax event="keyup" update="@(.employeeTable)"

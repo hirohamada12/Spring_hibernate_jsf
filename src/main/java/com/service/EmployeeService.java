@@ -19,5 +19,5 @@ public interface EmployeeService {
 	
 	void insertPhoneNumber(List<PhoneNumber> phoneNumber);
 
-
+	List<Object[]> getJob();
 }

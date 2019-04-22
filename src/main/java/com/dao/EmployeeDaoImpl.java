@@ -71,4 +71,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			}
 		}
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> getJob() {
+		Session session = this.sessionFactory.getCurrentSession();
+		List<Object[]> job = null;
+		job=session.createQuery("select distinct job from Employee").list();
+		return job;
+	}
 }
